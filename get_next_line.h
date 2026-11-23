@@ -6,7 +6,7 @@
 /*   By: mehaslan <mehaslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 01:19:10 by mehaslan          #+#    #+#             */
-/*   Updated: 2026/11/23 02:17:04 by mehaslan         ###   ########.fr       */
+/*   Updated: 2026/11/24 01:31:07 by mehaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strjoin(char *s1, char const *s2);
+char	*gnl_strchr(const char *s, int c);
 
 # endif

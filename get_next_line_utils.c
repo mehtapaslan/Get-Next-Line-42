@@ -6,52 +6,50 @@
 /*   By: mehaslan <mehaslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 01:19:25 by mehaslan          #+#    #+#             */
-/*   Updated: 2026/11/23 03:16:23 by mehaslan         ###   ########.fr       */
+/*   Updated: 2026/11/24 01:31:44 by mehaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	gnl_strlen(const char *str)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char *s1, char const *s2)
 {
 	size_t			len;
 	size_t			i;
 	char			*str;
+	char *temp;
 
 	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
+	temp = s1;
+	len = gnl_strlen(s1) + gnl_strlen(s2);
 	str = (char *)malloc(len + 1);
 	if (!str)
+	{
+		free(temp);
 		return (NULL);
-	while (*s1)
-	{
-		str[i] = *s1++;
-		i++;
 	}
+	while (s1 && *s1)
+		str[i++] = *s1++;
 	while (*s2)
-	{
-		str[i] = *s2++;
-		i++;
-	}
+		str[i++] = *s2++;
 	str[i] = '\0';
+	free(temp);
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
-	while (*s != (char)c)
+	while (s && *s != (char)c)
 	{
 		if (!*s)
 			return (NULL);
