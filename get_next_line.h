@@ -26,4 +26,4 @@ char	*gnl_strjoin(char *s1, char const *s2);
 char	*gnl_strchr(const char *s, int c);
 void	gnl_free(char **ptr);
 
-# endif
+#endif

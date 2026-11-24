@@ -27,7 +27,7 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	size_t			len;
 	size_t			i;
 	char			*str;
-	char *temp;
+	char			*temp;
 
 	i = 0;
 	temp = s1;
