@@ -6,7 +6,7 @@
 /*   By: mehaslan <mehaslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 01:19:25 by mehaslan          #+#    #+#             */
-/*   Updated: 2026/11/24 01:31:44 by mehaslan         ###   ########.fr       */
+/*   Updated: 2026/11/24 03:40:03 by mehaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,19 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	return (str);
 }
 
-char	*gnl_strchr(const char *s, int c)
+char	*gnl_strchr(const char *str, int c)
 {
-	while (s && *s != (char)c)
+	while (str && *str != (char)c)
 	{
-		if (!*s)
+		if (!*str)
 			return (NULL);
-		s++;
+		str++;
 	}
-	return ((char *)s);
+	return ((char *)str);
+}
+
+void	gnl_free(char **ptr)
+{
+	free(*ptr);
+	*ptr = NULL;
 }

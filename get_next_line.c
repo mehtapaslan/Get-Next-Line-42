@@ -6,7 +6,7 @@
 /*   By: mehaslan <mehaslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 01:19:23 by mehaslan          #+#    #+#             */
-/*   Updated: 2026/11/24 02:44:35 by mehaslan         ###   ########.fr       */
+/*   Updated: 2026/11/24 03:50:34 by mehaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ static void	join_line(int fd, char **remainder)
 
     buffer = malloc(BUFFER_SIZE + 1);
     if (!buffer)
-		return ;
+    {
+        gnl_free(remainder);
+        return ;
+    }
     bytes = 1;
 	while (bytes > 0 && !gnl_strchr(*remainder, '\n'))
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes < 0)
 		{
-			free(*remainder);
-			*remainder = NULL;
-			break;
+			gnl_free(remainder);
+            break ;
 		}
 		buffer[bytes] = '\0';
 		*remainder = gnl_strjoin(*remainder, buffer);
@@ -52,7 +54,7 @@ static char	*get_line(char *remainder)
         len++;
     if (remainder[len] == '\n')
 		len++;
-    line = malloc(sizeof(char) * (len + 1));
+    line = malloc(len + 1);
     if(!line)
         return(NULL);
     while(len--)
@@ -66,7 +68,31 @@ static char	*get_line(char *remainder)
 
 static void	next_line(char **remainder)
 {
-    
+    int i;
+    char *newline;
+    char *temp;
+
+    i = 0;
+    newline = gnl_strchr(*remainder, '\n');
+    if(!newline || !newline[1])
+    {
+        gnl_free(remainder);
+        return ;
+    }
+    temp = malloc(gnl_strlen(newline + 1) + 1);
+    if(!temp)
+    {
+        gnl_free(remainder);
+        return ;
+    }
+    while(newline[1 + i])
+    {
+        temp[i] = newline[1 + i];
+        i++;
+    }
+    temp[i] = '\0';
+    free(*remainder);
+    *remainder = temp;
 }
 
 char *get_next_line(int fd)
